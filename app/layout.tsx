@@ -6,6 +6,7 @@ import localFont from 'next/font/local';
 import { Space_Grotesk, Inter } from 'next/font/google';
 import ThemeProvider from '@/context/Theme';
 import { cn } from "@/lib/utils";
+import Navbar from '@/components/navigation/navbar';
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -46,6 +47,7 @@ export default function RootLayout({
           defaultTheme="system"
           disableTransitionOnChange
         >
+          <Navbar></Navbar>
           {children}
         </ThemeProvider>
       </body>
