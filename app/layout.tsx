@@ -7,6 +7,9 @@ import { Space_Grotesk, Inter } from 'next/font/google';
 import ThemeProvider from '@/context/Theme';
 import { cn } from "@/lib/utils";
 import Navbar from '@/components/navigation/navbar';
+import { Toaster } from '@/components/ui/sonner';
+import { SessionProvider } from 'next-auth/react';
+import { auth } from '@/auth';
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -29,17 +32,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>): ReactElement {
+  const session = await auth()
   return (
     <html
       lang="en"
       className={cn("h-full", "antialiased", interLocal.className, spaceGrotesk.variable, "font-sans", inter.variable)}
       suppressHydrationWarning
     >
+    <SessionProvider session={session}>
       <body className="min-h-full flex flex-col">
         <ThemeProvider
           attribute="class"
@@ -47,10 +52,13 @@ export default function RootLayout({
           defaultTheme="system"
           disableTransitionOnChange
         >
-          <Navbar></Navbar>
           {children}
+
         </ThemeProvider>
+        <Toaster />
       </body>
+    </SessionProvider>
+
     </html>
   );
 }

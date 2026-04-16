@@ -7,7 +7,14 @@ import love from 'eslint-config-love';
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  { ...love, files: ['**/*.js', '**/*.ts', '**/*.tsx'] },
+  {
+    ...love,
+    files: ['**/*.js', '**/*.ts', '**/*.tsx'],
+    rules: {
+      ...(love.rules || {}),
+      '@typescript-eslint/explicit-function-return-type': 'warn',
+    },
+  },
   prettier,
 
   globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
