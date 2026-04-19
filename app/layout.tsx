@@ -6,7 +6,6 @@ import localFont from 'next/font/local';
 import { Space_Grotesk, Inter } from 'next/font/google';
 import ThemeProvider from '@/context/Theme';
 import { cn } from "@/lib/utils";
-import Navbar from '@/components/navigation/navbar';
 import { Toaster } from '@/components/ui/sonner';
 import { SessionProvider } from 'next-auth/react';
 import { auth } from '@/auth';
@@ -36,7 +35,7 @@ export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>): ReactElement {
+}>): Promise<ReactElement> {
   const session = await auth()
   return (
     <html

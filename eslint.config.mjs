@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
     rules: {
       ...(love.rules || {}),
       '@typescript-eslint/explicit-function-return-type': 'warn',
+      '@typescript-eslint/no-magic-numbers': 'no'
     },
   },
   prettier,
